@@ -10,6 +10,11 @@
     </parent>
 
     <artifactId>authorization</artifactId>
+    <description>
+        1.各种平台第三方以及平台自身的登录
+        2.用户的身份信息获取
+        3.
+    </description>
 
     <properties>
         <maven.compiler.source>23</maven.compiler.source>
