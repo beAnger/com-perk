@@ -2,7 +2,6 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-!**/.flattened-pom.xml
 
 ### IntelliJ IDEA ###
 .idea
@@ -34,3 +33,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
+.flattened-pom.xml
