@@ -5,9 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>pro.yqy</groupId>
-        <artifactId>com-perk</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
+        <artifactId>authorization</artifactId>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>authorization-client</artifactId>
