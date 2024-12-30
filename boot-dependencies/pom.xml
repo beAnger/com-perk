@@ -3,24 +3,29 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>pro.yqy</groupId>
+        <artifactId>com-perk</artifactId>
+        <version>${revision}</version>
+    </parent>
 
-    <groupId>pro.yqy</groupId>
     <artifactId>boot-dependencies</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>component-web</module>
+        <module>component-redis</module>
     </modules>
 
     <properties>
-        <maven.compiler.source>23</maven.compiler.source>
-        <maven.compiler.target>23</maven.compiler.target>
-        <revision>1.0.0</revision>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <springboot.version>3.2.0</springboot.version>
         <springcloud.version>2024.0.0</springcloud.version>
         <commons-lang.version>2.6</commons-lang.version>
+        <lombok.verion>1.18.30</lombok.verion>
     </properties>
 
     <dependencyManagement>

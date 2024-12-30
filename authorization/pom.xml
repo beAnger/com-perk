@@ -18,6 +18,7 @@
     </modules>
 
     <artifactId>authorization</artifactId>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
     <description>
