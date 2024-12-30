@@ -16,6 +16,9 @@
     <modules>
         <module>component-web</module>
         <module>component-redis</module>
+        <module>component-mybatis-flex</module>
+        <module>component-knife4j</module>
+        <module>component-model</module>
     </modules>
 
     <properties>
@@ -23,9 +26,12 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <springboot.version>3.2.0</springboot.version>
-        <springcloud.version>2024.0.0</springcloud.version>
+        <springcloud.version>2023.0.0</springcloud.version>
         <commons-lang.version>2.6</commons-lang.version>
         <lombok.verion>1.18.30</lombok.verion>
+        <mybatis-flex.version>1.10.4</mybatis-flex.version>
+        <knife4j.version>4.5.0</knife4j.version>
+        <swagger-annotation.version>2.1.2</swagger-annotation.version>
     </properties>
 
     <dependencyManagement>
