@@ -17,6 +17,12 @@
             <artifactId>component-web</artifactId>
             <version>${revision}</version>
         </dependency>
+
+        <dependency>
+            <groupId>pro.yqy</groupId>
+            <artifactId>component-knife4j</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
 </project>

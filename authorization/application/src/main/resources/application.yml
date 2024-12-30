@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: authorization
-  profiles:
-    active: dev
-
-boot:
-  restlog:
-    enable: false

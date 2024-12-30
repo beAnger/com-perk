@@ -43,7 +43,7 @@ public class RestLog {
         logMap.put("Referer", request.getHeader("Referer"));
         logMap.put("Content-Type", request.getContentType());
         logMap.put("User-Agent", request.getHeader("User-Agent"));
-        log.info("接收请求:\n{}\n参数内容:{}", SingletonItem.OBJECT_MAPPER.writeValueAsString(logMap), params);
+        log.info("接收请求:\n{}\n参数内容:\n{}", SingletonItem.OBJECT_MAPPER.writeValueAsString(logMap), params);
     }
 
     public static void logResponse(Object result) {
@@ -61,10 +61,10 @@ public class RestLog {
             }
             Long requestTime = startTime.get();
             if (requestTime != null && requestTime > 0) {
-                log.info("执行{}毫秒，返回结果:{}", System.currentTimeMillis() - requestTime, result);
+                log.info("执行{}毫秒，返回结果:\n{}", System.currentTimeMillis() - requestTime, result);
                 startTime.remove();
             } else if (requestTime == null) {
-                log.info("执行结束，返回结果:{}", result);
+                log.info("执行结束，返回结果:\n{}", result);
             }
         } catch (Exception e) {
             log.error("LOG_RESPONSE_ERROR", e);

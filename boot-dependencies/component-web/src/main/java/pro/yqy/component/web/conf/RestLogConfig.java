@@ -21,7 +21,7 @@ public class RestLogConfig {
     }
 
     public static boolean isEnable() {
-        return restLogProperties.isEnable();
+        return restLogProperties.getEnable() != null && restLogProperties.getEnable();
     }
 
     /**
@@ -29,8 +29,8 @@ public class RestLogConfig {
      */
     private static final String[] IGNORE_PATHS = { "/swagger", "/swagger-ui",
             "/swagger-ui/*", "/webjars", "/druid", "/info", "/health", "/v2/api-docs",
-            "/v3/api-docs", "/csrf", "/favicon", "/metrics", "/hystrix.stream", "/env",
-            "/configprops", "/actuator", "/swagger-resources" };
+            "/v3/api-docs", "/csrf", "/favicon", "/favicon.ico","/metrics", "/hystrix.stream", "/env",
+            "/configprops", "/actuator", "/swagger-resources", "doc.html" };
 
     public static String[] getIgnorePaths() {
         return (restLogProperties.getExcludeUrls() == null || "null".equals(restLogProperties.getExcludeUrls()))
