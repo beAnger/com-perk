@@ -1,0 +1,46 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: gateway
+
+knife4j:
+  enable: true
+  gateway:
+    # 是否开启
+    enabled: true
+    # 排序规则(tag/operation排序自4.2.0版本新增)
+    # 取值：alpha-默认排序规则，官方swagger-ui默认实现,order-Knife4j提供的增强排序规则，开发者可扩展x-order，根据数值来自定义排序
+    tags-sorter: order
+    operations-sorter: order
+    # 指定服务发现的模式聚合微服务文档，并且是默认`default`分组
+    strategy: discover
+    # 服务发现模式的配置
+    discover:
+      # 开启
+      enabled: true
+      # 指定版本号(swagger2|openapi3)
+      version : openapi3
+      # 需要排除的微服务(eg:网关服务)
+      excluded-services:
+        - gateway-service
+      # 如果子服务是OpenAPI3，并且有个性化配置
+      oas3:
+        url: /v3/api-docs?group=default
+        oauth2-redirect-url: ''
+        validator-url: ''
+        # 单个服务的个性化配置，key-服务名称，value-配置信息
+      service-config:
+        # 假设order服务(具体真实服务开发者根据自己的情况配置)
+        order-service:
+          # 该服务的排序
+          order: 0
+          # 分组显示名称
+          group-name: 订单服务名称
+          # 兼容OpenAPI3规范在聚合时丢失contextPath属性的异常情况，由开发者自己配置contextPath,Knife4j的前端Ui做兼容处理,与url属性独立不冲突，仅OpenAPI3规范聚合需要，OpenAPI2规范不需要设置此属性,默认为(apiPathPrefix)
+          context-path: /
+          # 该属性自4.2.0添加，支持子服务非`default`分组的其他分组聚合
+          # 参考 https://gitee.com/xiaoym/knife4j/pulls/87
+          group-names:
+            - 分组1
+            - 分组2

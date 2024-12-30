@@ -11,8 +11,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>authorization</module>
         <module>boot-dependencies</module>
+        <module>authorization</module>
         <module>gateway</module>
     </modules>
 

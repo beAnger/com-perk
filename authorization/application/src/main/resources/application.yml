@@ -1,8 +1,8 @@
 spring:
   application:
-    name: demo
+    name: authorization
   profiles:
-    active: authorization
+    active: dev
 
 boot:
   restlog:

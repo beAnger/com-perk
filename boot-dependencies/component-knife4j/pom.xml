@@ -6,7 +6,7 @@
     <parent>
         <groupId>pro.yqy</groupId>
         <artifactId>boot-dependencies</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>component-knife4j</artifactId>
