@@ -53,7 +53,9 @@ public class RestResponseBody implements ResponseBodyAdvice<Object> {
                                   MethodParameter returnType,
                                   MediaType selectedContentType,
                                   Class<? extends HttpMessageConverter<?>> selectedConverterType,
-                                  ServerHttpRequest request, ServerHttpResponse response) {
+                                  ServerHttpRequest request,
+                                  ServerHttpResponse response) {
+
         if (restResponseBodyAdapter != null) {
             return restResponseBodyAdapter.handle(body, returnType, selectedContentType,
                     selectedConverterType, request, response);
