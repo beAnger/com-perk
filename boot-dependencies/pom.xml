@@ -17,7 +17,7 @@
         <module>component-web</module>
         <module>component-redis</module>
         <module>component-mybatis-flex</module>
-        <module>component-knife4j</module>
+        <module>component-swagger</module>
         <module>component-model</module>
     </modules>
 
@@ -31,7 +31,6 @@
         <commons-lang.version>2.6</commons-lang.version>
         <lombok.verion>1.18.30</lombok.verion>
         <mybatis-flex.version>1.10.4</mybatis-flex.version>
-        <knife4j.version>4.5.0</knife4j.version>
         <swagger-annotation.version>2.1.2</swagger-annotation.version>
     </properties>
 

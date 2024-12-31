@@ -15,7 +15,7 @@ public class RestLog {
     private static final ThreadLocal<Long> startTime = new ThreadLocal<>();
 
     public static void logRequest(HttpRequestWrapper request) throws JsonProcessingException {
-        if (!RestLogConfig.isEnable()) {
+        if (RestLogConfig.isEnable()) {
             startTime.set(-1L);
             return;
         }
@@ -47,7 +47,7 @@ public class RestLog {
     }
 
     public static void logResponse(Object result) {
-        if (!RestLogConfig.isEnable() || !log.isDebugEnabled()) {
+        if (RestLogConfig.isEnable() || !log.isDebugEnabled()) {
             return;
         }
         try {

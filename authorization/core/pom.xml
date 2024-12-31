@@ -20,7 +20,7 @@
 
         <dependency>
             <groupId>pro.yqy</groupId>
-            <artifactId>component-knife4j</artifactId>
+            <artifactId>component-swagger</artifactId>
             <version>${revision}</version>
         </dependency>
     </dependencies>

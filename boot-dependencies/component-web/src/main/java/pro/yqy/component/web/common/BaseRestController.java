@@ -78,7 +78,6 @@ public abstract class BaseRestController {
         }
     }
 
-
     @ExceptionHandler({AccessDeniedException.class})
     public Object handleAccessDeniedException(Exception e) {
         return this.handleExceptionAdapter(new RestException(RestStatus.UN_AUTHORIZATION));
