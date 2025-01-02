@@ -1,0 +1,48 @@
+server:
+port: 9090
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true # 开启基于服务发现路由规则
+          lower-case-service-id: true #小写的服务名称
+          predicates[0]:
+            name: Path
+            args[pattern]: "'/' + serviceId + '/**'"
+          filters[0]:
+            name: RewritePath
+            args[regexp]: "'/' + serviceId + '/(?<remaining>.*)'"
+            args[replacement]: "'/${remaining}'"
+
+knife4j:
+  gateway:
+    # 是否开启
+    enabled: true
+    # 排序规则(tag/operation排序自4.2.0版本新增)
+    # 取值：alpha-默认排序规则，官方swagger-ui默认实现,order-Knife4j提供的增强排序规则，开发者可扩展x-order，根据数值来自定义排序
+    tags-sorter: order
+    operations-sorter: order
+    # 指定服务发现的模式聚合微服务文档，并且是默认`default`分组
+    strategy: discover
+    # 服务发现模式的配置
+    discover:
+      # 开启
+      enabled: true
+      # 指定版本号(swagger2|openapi3)
+      version : openapi3
+      # 需要排除的微服务(eg:网关服务)
+      excluded-services:
+        - order
+      # 如果子服务是OpenAPI3，并且有个性化配置
+      oas3:
+        url: /v3/api-docs?group=default
+        oauth2-redirect-url: ''
+        validator-url: ''
