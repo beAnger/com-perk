@@ -33,6 +33,7 @@
             <artifactId>component-nacos</artifactId>
             <version>${revision}</version>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
