@@ -19,6 +19,7 @@
         <module>component-mybatis-flex</module>
         <module>component-knife4j</module>
         <module>component-model</module>
+        <module>component-nacos</module>
     </modules>
 
     <properties>
@@ -33,6 +34,8 @@
         <mybatis-flex.version>1.10.4</mybatis-flex.version>
         <swagger-annotation.version>2.1.2</swagger-annotation.version>
         <knife4j.version>4.5.0</knife4j.version>
+        <nacos.version>2023.0.3.2</nacos.version>
+        <micrometer.version>1.12.0</micrometer.version>
     </properties>
 
     <dependencyManagement>

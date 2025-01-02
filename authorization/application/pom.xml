@@ -17,6 +17,12 @@
             <artifactId>authorization-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>pro.yqy</groupId>
+            <artifactId>component-nacos</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
     <build>

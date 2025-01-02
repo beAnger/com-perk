@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>component-swagger</artifactId>
+    <artifactId>component-knife4j</artifactId>
 
     <dependencies>
         <dependency>
