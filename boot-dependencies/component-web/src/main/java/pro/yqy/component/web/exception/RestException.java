@@ -16,8 +16,6 @@ import java.util.Objects;
 @Getter
 @Setter
 public class RestException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
-
     protected Logger logger;
 
     private Integer code;
