@@ -1,0 +1,27 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: authorization
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+
+boot:
+  restlog:
+    enable: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  api-docs:
+    path: /v3/api-docs
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
