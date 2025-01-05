@@ -8,14 +8,11 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 import pro.yqy.component.redis.Redis;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-@Service
 @Slf4j
+@Service
 public class RedisImpl implements Redis {
 
     @Resource
@@ -85,7 +82,7 @@ public class RedisImpl implements Redis {
     @Override
     public boolean exists(String key) {
         Boolean exists = redisTemplate.hasKey(appendKeyPrefix(key));
-        return exists != null ? exists : false;
+        return Objects.nonNull(exists) && exists;
     }
 
     /**
