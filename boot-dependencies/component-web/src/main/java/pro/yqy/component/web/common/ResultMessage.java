@@ -3,6 +3,7 @@ package pro.yqy.component.web.common;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import pro.yqy.component.web.error.IRestStatus;
+import pro.yqy.component.web.error.enumeration.RestStatus;
 
 import java.io.Serializable;
 
@@ -23,5 +24,9 @@ public class ResultMessage<T> implements Serializable {
         this.code = restStatus.code();
         this.msg = restStatus.message();
         this.data = data;
+    }
+
+    public static <T> ResultMessage<T> ok(T data) {
+        return new ResultMessage<>(RestStatus.SUCCESS, data);
     }
 }

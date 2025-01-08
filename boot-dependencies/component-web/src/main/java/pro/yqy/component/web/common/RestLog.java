@@ -61,13 +61,12 @@ public class RestLog {
 
             Long requestTime = startTime.get();
             if (Objects.isNull(requestTime) || requestTime <= 0) {
-                log.info("执行结束，返回结果:\n{}", result);
+                log.info("执行结束，返回结果:\n{}", outputStr);
                 return;
             }
 
             log.info("执行{}毫秒，返回结果:\n{}", System.currentTimeMillis() - requestTime, outputStr);
             startTime.remove();
-
         } catch (Exception e) {
             log.error("LOG_RESPONSE_ERROR", e);
         }

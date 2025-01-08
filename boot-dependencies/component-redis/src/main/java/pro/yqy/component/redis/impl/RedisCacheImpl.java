@@ -6,20 +6,19 @@ import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
-import pro.yqy.component.redis.Redis;
+import pro.yqy.component.redis.RedisCache;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
-public class RedisImpl implements Redis {
+public class RedisCacheImpl implements RedisCache {
 
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
     //key操作
-
     private String appendKeyPrefix(Object key) {
         if (key instanceof String) {
             return ((String) key);

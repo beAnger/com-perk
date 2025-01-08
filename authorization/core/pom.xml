@@ -20,7 +20,7 @@
 
         <dependency>
             <groupId>pro.yqy</groupId>
-            <artifactId>component-knife4j</artifactId>
+            <artifactId>component-redis</artifactId>
             <version>${revision}</version>
         </dependency>
 
@@ -28,6 +28,12 @@
             <groupId>pro.yqy</groupId>
             <artifactId>authorization-model</artifactId>
             <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>pro.yqy</groupId>
+            <artifactId>component-knife4j</artifactId>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 

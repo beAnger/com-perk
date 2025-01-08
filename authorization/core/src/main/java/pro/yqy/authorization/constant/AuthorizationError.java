@@ -7,7 +7,8 @@ import pro.yqy.component.web.error.IRestStatus;
 @Getter
 @AllArgsConstructor
 public enum AuthorizationError implements IRestStatus {
-    account_format_incorrect(100001, "账号信息格式错误")
+    account_format_incorrect(100001, "账号信息格式错误"),
+    request_too_frequent(100002, "请求过于频繁，请稍候再重试")
 
     ;
 

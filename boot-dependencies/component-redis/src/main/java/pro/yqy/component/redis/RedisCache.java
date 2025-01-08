@@ -12,7 +12,7 @@ import java.util.Set;
  * redis简易封装,如有需要的方法不存在可以在此类中添加
  * 也可以使用RedisTemplate
  */
-public interface Redis {
+public interface RedisCache {
     //key操作
 
     /**

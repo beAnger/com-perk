@@ -27,10 +27,12 @@ public class RestLogConfig {
     /**
      * 忽略打印日志的接口
      */
-    private static final String[] IGNORE_PATHS = { "/swagger", "/swagger-ui",
-            "/swagger-ui/*", "/webjars", "/druid", "/info", "/health", "/v2/api-docs",
-            "/v3/api-docs", "/csrf", "/favicon", "/favicon.ico","/metrics", "/hystrix.stream", "/env",
-            "/configprops", "/actuator", "/swagger-resources", "doc.html" };
+    private static final String[] IGNORE_PATHS = {
+//            "/swagger", "/swagger-ui", "/swagger-ui/*", "/webjars", "/druid",
+//            "/info", "/health", "/v2/api-docs", "/v3/api-docs", "/csrf", "/favicon",
+//            "/favicon.ico", "/metrics", "/hystrix.stream", "/env", "/configprops",
+//            "/actuator", "/swagger-resources", "/doc.html"
+    };
 
     public static String[] getIgnorePaths() {
         return (restLogProperties.getExcludeUrls() == null || "null".equals(restLogProperties.getExcludeUrls()))

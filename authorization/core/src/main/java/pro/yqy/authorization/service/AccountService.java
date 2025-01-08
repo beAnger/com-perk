@@ -5,6 +5,6 @@ import pro.yqy.authorization.model.bean.account.RegisterRequestBean;
 
 public interface AccountService {
 
-    String register(@NotNull RegisterRequestBean requestBean) throws Exception;
+    String register(@NotNull RegisterRequestBean requestBean);
 
 }

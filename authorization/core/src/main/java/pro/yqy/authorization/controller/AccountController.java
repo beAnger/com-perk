@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pro.yqy.authorization.model.bean.account.RegisterRequestBean;
 import pro.yqy.authorization.service.AccountService;
 import pro.yqy.component.web.common.BaseRestController;
+import pro.yqy.component.web.common.ResultMessage;
 
 @Tag(name = "用户账号接口")
 @RestController
@@ -22,8 +23,8 @@ public class AccountController extends BaseRestController {
 
     @PostMapping(value = "/register")
     @Operation(summary = "账号注册接口")
-    public Object register(@Validated @RequestBody RegisterRequestBean requestBean) throws Exception {
-        return accountService.register(requestBean);
+    public ResultMessage<String> register(@Validated @RequestBody RegisterRequestBean requestBean) {
+        return ResultMessage.ok(accountService.register(requestBean));
     }
 
 }
