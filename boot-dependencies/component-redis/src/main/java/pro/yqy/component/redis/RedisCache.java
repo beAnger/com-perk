@@ -1,5 +1,6 @@
 package pro.yqy.component.redis;
 
+import jakarta.annotation.Nullable;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.core.ZSetOperations;
 
@@ -82,11 +83,12 @@ public interface RedisCache {
     /**
      * 当key不存在时 设置key value
      *
-     * @param key   key
+     * @param key     key
      * @param timeout 过期时间，秒为单位
-     * @param value value
+     * @param value   value
      * @return boolean true为成功，可能为空
      */
+    @Nullable
     Boolean setNx(String key, Long timeout, Object value);
 
 
@@ -96,8 +98,7 @@ public interface RedisCache {
      * @param key key
      * @return value
      */
-    @SuppressWarnings("unchecked")
-    <T> T get(String key);
+    <T> T get(String key, Class<T> exampleClass) throws ClassCastException;
 
     /**
      * 获取所有(一个或多个)给定 key 的值
@@ -201,20 +202,20 @@ public interface RedisCache {
     /**
      * 从左出栈
      *
-     * @param key key
+     * @param key   key
+     * @param clazz clazz
      * @return value
      */
-    @SuppressWarnings("unchecked")
-    <T> T lPop(String key);
+    <T> T lPop(String key, Class<T> clazz) throws ClassCastException;
 
     /**
      * 从右出栈
      *
-     * @param key key
+     * @param key   key
+     * @param clazz className
      * @return value
      */
-    @SuppressWarnings("unchecked")
-    <T> T rPop(String key);
+    <T> T rPop(String key, Class<T> clazz) throws ClassCastException;
 
 
     /**
@@ -222,10 +223,10 @@ public interface RedisCache {
      *
      * @param key   key
      * @param index index
+     * @param clazz clazz
      * @return value
      */
-
-    <T> T getKeyIndex(String key, int index);
+    <T> T getKeyIndex(String key, int index, Class<T> clazz) throws ClassCastException;
 
     /**
      * 获取列表的长度

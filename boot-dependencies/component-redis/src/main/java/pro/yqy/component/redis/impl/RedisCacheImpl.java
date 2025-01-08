@@ -139,10 +139,9 @@ public class RedisCacheImpl implements RedisCache {
      * @param key key
      * @return value
      */
-    @SuppressWarnings("unchecked")
     @Override
-    public <T> T get(String key) {
-        return (T) redisTemplate.opsForValue().get(appendKeyPrefix(key));
+    public <T> T get(String key, Class<T> exampleClass) throws ClassCastException{
+        return exampleClass.cast(redisTemplate.opsForValue().get(appendKeyPrefix(key)));
     }
 
     /**
@@ -295,25 +294,25 @@ public class RedisCacheImpl implements RedisCache {
     /**
      * 从左出栈
      *
-     * @param key key
+     * @param key   key
+     * @param clazz clazz
      * @return value
      */
-    @SuppressWarnings("unchecked")
     @Override
-    public <T> T lPop(String key) {
-        return (T) redisTemplate.opsForList().leftPop(appendKeyPrefix(key));
+    public <T> T lPop(String key, Class<T> clazz) throws ClassCastException{
+        return clazz.cast(redisTemplate.opsForList().leftPop(appendKeyPrefix(key)));
     }
 
     /**
      * 从右出栈
      *
-     * @param key key
+     * @param key   key
+     * @param clazz clazz
      * @return value
      */
-    @SuppressWarnings("unchecked")
     @Override
-    public <T> T rPop(String key) {
-        return (T) redisTemplate.opsForList().rightPop(appendKeyPrefix(key));
+    public <T> T rPop(String key, Class<T> clazz) {
+        return clazz.cast(redisTemplate.opsForList().rightPop(appendKeyPrefix(key)));
     }
 
 
@@ -322,12 +321,12 @@ public class RedisCacheImpl implements RedisCache {
      *
      * @param key   key
      * @param index index
+     * @param clazz
      * @return value
      */
-    @SuppressWarnings("unchecked")
     @Override
-    public <T> T getKeyIndex(String key, int index) {
-        return (T) redisTemplate.opsForList().index(appendKeyPrefix(key), index);
+    public <T> T getKeyIndex(String key, int index, Class<T> clazz) {
+        return clazz.cast(redisTemplate.opsForList().index(appendKeyPrefix(key), index));
     }
 
     /**
