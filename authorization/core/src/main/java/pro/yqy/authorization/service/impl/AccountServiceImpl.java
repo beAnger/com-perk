@@ -12,6 +12,8 @@ import pro.yqy.component.web.singleton.SingletonItem;
 
 import java.util.Objects;
 
+import pro.yqy.authorization.model.constant.account.AccountRedisKey;
+
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -19,22 +21,19 @@ public class AccountServiceImpl implements AccountService {
 
     private final RedisCache redisCache;
 
-    private static final String REGISTER_ACCOUNT_PREFIX_KEY = "authorization:register:account:";
-
 
     @Override
     public String register(RegisterRequestBean requestBean) {
-        Boolean exists = redisCache.setNx(REGISTER_ACCOUNT_PREFIX_KEY + requestBean.getIdentity(), 1L, "1");
+        Boolean exists = redisCache.setNx(AccountRedisKey.REGISTER_ACCOUNT_PREFIX_KEY + requestBean.getIdentity(), 1L, "1");
         if (Objects.isNull(exists) || !exists) {
             throw new RestException(AuthorizationError.request_too_frequent);
         }
 
-        boolean matches = requestBean.getIdentity().matches(requestBean.getRegisterType().getRegex());
-        if (!matches) {
+        boolean identityLegal = requestBean.getIdentity().matches(requestBean.getRegisterType().getRegex());
+        if (!identityLegal) {
             throw new RestException(AuthorizationError.account_format_incorrect);
         }
 
-        log.info("register success: {}", redisCache.get(requestBean.getIdentity()).toString());
         return SingletonItem.OPERATE_SUCCESS;
     }
 }
