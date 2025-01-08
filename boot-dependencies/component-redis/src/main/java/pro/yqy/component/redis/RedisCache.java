@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.ZSetOperations;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author zhangzhiwei
@@ -76,9 +77,10 @@ public interface RedisCache {
      *
      * @param key    key
      * @param value  value
-     * @param second 失效时间 单位为秒
+     * @param timeout 失效时间
+     * @param timeUnit 失效时间单位
      */
-    void setex(Object key, Integer second, Object value);
+    void setEx(Object key, Long timeout, TimeUnit timeUnit, Object value);
 
     /**
      * 当key不存在时 设置key value
@@ -86,10 +88,11 @@ public interface RedisCache {
      * @param key     key
      * @param timeout 过期时间，秒为单位
      * @param value   value
+     * @param timeUnit 失效时间单位
      * @return boolean true为成功，可能为空
      */
     @Nullable
-    Boolean setNx(String key, Long timeout, Object value);
+    Boolean setNx(String key, Long timeout, TimeUnit timeUnit, Object value);
 
 
     /**

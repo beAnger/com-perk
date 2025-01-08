@@ -5,28 +5,23 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import pro.yqy.authorization.model.enumeration.account.AccountActionType;
 import pro.yqy.authorization.model.enumeration.account.ChannelType;
-
-import java.io.Serializable;
 
 @Getter
 @Setter
 @NotNull
-@Schema(name = "用户注册请求对象")
-public class RegisterRequestBean implements Serializable {
-    @NotNull(message = "渠道方式不能为空或不支持的注册类型")
-    @Schema(description = "渠道")
+@Schema(name = "发送验证码请求对象")
+public class SendVerificationCodeRequestBean {
+    @NotNull(message = "渠道类型不能为空或不支持的渠道类型")
+    @Schema(description = "渠道类型")
     private ChannelType channelType;
 
     @NotBlank(message = "渠道号码不能为空")
     @Schema(description = "渠道号码")
     private String identity;
 
-    @NotBlank(message = "密码不能为空")
-    @Schema(description = "密码")
-    private String password;
-
-    @NotBlank(message = "验证码不能为空")
-    @Schema(description = "验证码")
-    private String verificationCode;
+    @NotNull(message = "作用类型不能为空")
+    @Schema(description = "作用类型")
+    private AccountActionType actionType;
 }

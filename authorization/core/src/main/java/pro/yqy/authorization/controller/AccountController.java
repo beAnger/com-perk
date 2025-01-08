@@ -2,11 +2,13 @@ package pro.yqy.authorization.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pro.yqy.authorization.model.bean.account.RegisterRequestBean;
+import pro.yqy.authorization.model.bean.account.SendVerificationCodeRequestBean;
 import pro.yqy.authorization.service.AccountService;
 import pro.yqy.component.web.common.BaseRestController;
 
@@ -17,6 +19,13 @@ import pro.yqy.component.web.common.BaseRestController;
 public class AccountController extends BaseRestController {
 
     private final AccountService accountService;
+
+    @PostMapping(value = "/send-verification-code", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "发送验证码")
+    public String sendVerificationCode(HttpServletRequest request,
+                                       @Validated @RequestBody SendVerificationCodeRequestBean requestBean) {
+        return accountService.sendVerificationCode(request, requestBean);
+    }
 
     @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "账号注册接口")

@@ -111,25 +111,27 @@ public class RedisCacheImpl implements RedisCache {
     /**
      * set字符串 并加上失效时间  以豪秒为单位
      *
-     * @param key    key
-     * @param value  value
-     * @param second 失效时间 单位为秒
+     * @param key      key
+     * @param value    value
+     * @param timeUnit 失效时间单位
+     * @param timeout  失效时间 单位为秒
      */
     @Override
-    public void setex(Object key, Integer second, Object value) {
-        redisTemplate.opsForValue().set(appendKeyPrefix(key), value, second, TimeUnit.SECONDS);
+    public void setEx(Object key, Long timeout, TimeUnit timeUnit, Object value) {
+        redisTemplate.opsForValue().set(appendKeyPrefix(key), value, timeout, timeUnit);
     }
 
     /**
      * 当key不存在时 设置key value
      *
-     * @param key   key
-     * @param value value
+     * @param key      key
+     * @param value    value
+     * @param timeUnit 失效时间单位
      * @return boolean true为成功，可能为空
      */
     @Override
-    public Boolean setNx(String key, Long timeout, Object value) {
-        return redisTemplate.opsForValue().setIfAbsent(appendKeyPrefix(key), value, timeout, TimeUnit.SECONDS);
+    public Boolean setNx(String key, Long timeout, TimeUnit timeUnit, Object value) {
+        return redisTemplate.opsForValue().setIfAbsent(appendKeyPrefix(key), value, timeout, timeUnit);
     }
 
 
@@ -140,7 +142,7 @@ public class RedisCacheImpl implements RedisCache {
      * @return value
      */
     @Override
-    public <T> T get(String key, Class<T> exampleClass) throws ClassCastException{
+    public <T> T get(String key, Class<T> exampleClass) throws ClassCastException {
         return exampleClass.cast(redisTemplate.opsForValue().get(appendKeyPrefix(key)));
     }
 
@@ -299,7 +301,7 @@ public class RedisCacheImpl implements RedisCache {
      * @return value
      */
     @Override
-    public <T> T lPop(String key, Class<T> clazz) throws ClassCastException{
+    public <T> T lPop(String key, Class<T> clazz) throws ClassCastException {
         return clazz.cast(redisTemplate.opsForList().leftPop(appendKeyPrefix(key)));
     }
 
@@ -321,7 +323,7 @@ public class RedisCacheImpl implements RedisCache {
      *
      * @param key   key
      * @param index index
-     * @param clazz
+     * @param clazz clazz
      * @return value
      */
     @Override

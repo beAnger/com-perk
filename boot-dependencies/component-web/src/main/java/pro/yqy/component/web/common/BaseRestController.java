@@ -68,9 +68,7 @@ public abstract class BaseRestController {
     public Object doHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         String msg = e.getMessage();
         if (msg.startsWith("JSON parse error")) {
-            String start = "problem:";
-            msg = "字段[" + msg.substring(msg.indexOf(start) + start.length(), msg.length() - 1) + "]解析出错";
-            return this.handleExceptionAdapter(new RestException(RestStatus.INVALID_JSON_PARSE.code(), msg));
+            return this.handleExceptionAdapter(new RestException(RestStatus.INVALID_JSON_PARSE));
         } else {
             log.error("HttpMessageNotReadableException: {}, detail: {}", msg, e.getMessage());
             return this.handleExceptionAdapter(new RestException(msg, e));
