@@ -1,14 +1,12 @@
 package pro.yqy.component.web.common;
 
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import pro.yqy.component.web.error.IRestStatus;
 import pro.yqy.component.web.error.enumeration.RestStatus;
 
 import java.io.Serializable;
 
 @Getter
-@Slf4j
 public class ResultMessage<T> implements Serializable {
     private final int code;
     private final String msg;

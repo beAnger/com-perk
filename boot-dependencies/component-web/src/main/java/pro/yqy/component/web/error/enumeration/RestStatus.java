@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum RestStatus implements IRestStatus {
-    SUCCESS(0, "success"),
+    SUCCESS(200, "success"),
     ERROR(-1, "未知错误"),
     FEIGN_HYSTRIX(-3, "服务繁忙，请稍后重试"),
     UN_AUTHORIZATION(401, "当前用户权限不足"),
