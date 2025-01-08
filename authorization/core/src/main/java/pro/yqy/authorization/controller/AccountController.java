@@ -23,12 +23,4 @@ public class AccountController extends BaseRestController {
     public ResultMessage<String> register(@Validated @RequestBody RegisterRequestBean requestBean) {
         return ResultMessage.ok(accountService.register(requestBean));
     }
-
-
-    @GetMapping(value = "/int")
-    @Operation(summary = "返回一个整数")
-    public Integer register() {
-        return 800;
-    }
-
 }
