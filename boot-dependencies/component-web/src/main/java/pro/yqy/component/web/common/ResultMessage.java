@@ -3,7 +3,6 @@ package pro.yqy.component.web.common;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.Getter;
 import pro.yqy.component.web.error.IRestStatus;
-import pro.yqy.component.web.error.enumeration.RestStatus;
 import pro.yqy.component.web.singleton.SingletonItem;
 
 import java.io.Serializable;
@@ -24,10 +23,6 @@ public class ResultMessage<T> implements Serializable {
         this.code = restStatus.code();
         this.msg = restStatus.message();
         this.data = data;
-    }
-
-    public static <T> ResultMessage<T> ok(T data) {
-        return new ResultMessage<>(RestStatus.SUCCESS, data);
     }
 
     @Override
