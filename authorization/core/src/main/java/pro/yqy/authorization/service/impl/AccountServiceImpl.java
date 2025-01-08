@@ -5,14 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pro.yqy.authorization.constant.AuthorizationError;
 import pro.yqy.authorization.model.bean.account.RegisterRequestBean;
+import pro.yqy.authorization.model.constant.account.AccountRedisKey;
 import pro.yqy.authorization.service.AccountService;
 import pro.yqy.component.redis.RedisCache;
+import pro.yqy.component.web.error.enumeration.RestStatus;
 import pro.yqy.component.web.exception.RestException;
-import pro.yqy.component.web.singleton.SingletonItem;
 
 import java.util.Objects;
-
-import pro.yqy.authorization.model.constant.account.AccountRedisKey;
 
 @Slf4j
 @Service
@@ -35,6 +34,6 @@ public class AccountServiceImpl implements AccountService {
             throw new RestException(AuthorizationError.account_format_incorrect);
         }
 
-        return SingletonItem.OPERATE_SUCCESS;
+        return RestStatus.SUCCESS.message();
     }
 }
