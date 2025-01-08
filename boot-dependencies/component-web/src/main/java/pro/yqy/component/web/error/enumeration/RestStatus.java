@@ -1,11 +1,6 @@
 package pro.yqy.component.web.error.enumeration;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import pro.yqy.component.web.error.IRestStatus;
-import pro.yqy.component.web.singleton.SingletonItem;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public enum RestStatus implements IRestStatus {
     SUCCESS(200, "success"),
@@ -45,16 +40,4 @@ public enum RestStatus implements IRestStatus {
     public String message() {
         return msg;
     }
-
-    public Map<String, Object> toMap() {
-        Map<String, Object> map = new HashMap<>(4);
-        map.put("code", code);
-        map.put("msg", msg);
-        return map;
-    }
-
-    public String toJson() throws JsonProcessingException {
-        return SingletonItem.OBJECT_MAPPER.writeValueAsString(this.toMap());
-    }
-
 }
