@@ -9,6 +9,10 @@ spring:
   cloud:
     nacos:
       server-addr: localhost:8848
+      config:
+        server-addr: ${spring.cloud.nacos.server-addr}
+      discovery:
+        server-addr: ${spring.cloud.nacos.server-addr}
     gateway:
       discovery:
         locator:

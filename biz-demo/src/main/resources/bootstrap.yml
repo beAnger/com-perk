@@ -9,12 +9,18 @@ spring:
   cloud:
     nacos:
       server-addr: localhost:8848
+      config:
+        server-addr: ${spring.cloud.nacos.server-addr}
+      discovery:
+        server-addr: ${spring.cloud.nacos.server-addr}
 
 dubbo:
   registry:
     address: nacos://${spring.cloud.nacos.server-addr}
     username: nacos
     password: nacos
+    parameters:
+      namespace: 9ada058d-75f6-4f98-b760-b70b1b33709a
   application:
     name: biz-demo
     logger: slf4j
