@@ -24,7 +24,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public String register(RegisterRequestBean requestBean) {
-        Boolean exists = redisCache.setNx(AccountRedisKey.REGISTER_ACCOUNT_PREFIX_KEY + requestBean.getIdentity(), 1L, "1");
+        Boolean exists = redisCache.setNx(
+                AccountRedisKey.REGISTER_ACCOUNT_PREFIX_KEY + requestBean.getIdentity(), 1L, "1"
+        );
         if (Objects.isNull(exists) || !exists) {
             throw new RestException(AuthorizationError.request_too_frequent);
         }
