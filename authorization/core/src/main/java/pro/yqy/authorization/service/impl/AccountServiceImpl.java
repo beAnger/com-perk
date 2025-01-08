@@ -21,7 +21,6 @@ public class AccountServiceImpl implements AccountService {
 
     private final RedisCache redisCache;
 
-
     @Override
     public String register(RegisterRequestBean requestBean) {
         Boolean exists = redisCache.setNx(
