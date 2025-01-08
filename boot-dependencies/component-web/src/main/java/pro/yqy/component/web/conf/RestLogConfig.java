@@ -21,7 +21,7 @@ public class RestLogConfig {
     }
 
     public static boolean isEnable() {
-        return restLogProperties.getEnable() != null && !restLogProperties.getEnable();
+        return restLogProperties.getEnable() != null && restLogProperties.getEnable();
     }
 
     /**

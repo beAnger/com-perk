@@ -25,9 +25,9 @@ public class RestException extends RuntimeException {
     public void setError(Exception e, boolean isShowErrorDetail) {
         logger.error("系统异常", e);
         if (isShowErrorDetail) {
-            this.code = RestStatus.ERROR.getCode();
+            this.code = RestStatus.ERROR.code();
             if (Objects.isNull(this.msg)) {
-                this.msg = RestStatus.ERROR.getMessage();
+                this.msg = RestStatus.ERROR.message();
             }
             this.error = StringUtils.toString(e);
         }
@@ -40,7 +40,7 @@ public class RestException extends RuntimeException {
     public RestException(String msg, Exception e, Boolean isShowErrorDetail) {
         super(msg, null, false, isShowErrorDetail);
         this.logger = LoggerFactory.getLogger(RestException.class);
-        this.code = RestStatus.ERROR.getCode();
+        this.code = RestStatus.ERROR.code();
         this.msg = msg;
         this.setError(e, isShowErrorDetail);
     }
@@ -51,20 +51,20 @@ public class RestException extends RuntimeException {
 
     public RestException(Exception e, boolean isShowErrorDetail) {
         super(e.getMessage(), null, false, isShowErrorDetail);
-        this.code = RestStatus.ERROR.getCode();
+        this.code = RestStatus.ERROR.code();
         this.setError(e, isShowErrorDetail);
         this.logger = LoggerFactory.getLogger(RestException.class);
     }
 
     public RestException(IRestStatus restStatus) {
-        this.code = restStatus.getCode();
-        this.msg = restStatus.getMessage();
+        this.code = restStatus.code();
+        this.msg = restStatus.message();
         this.logger = LoggerFactory.getLogger(RestException.class);
     }
 
     public RestException(RestStatus restStatus, String error) {
-        this.code = restStatus.getCode();
-        this.msg = restStatus.getMessage();
+        this.code = restStatus.code();
+        this.msg = restStatus.message();
         this.error = error;
         this.logger = LoggerFactory.getLogger(RestException.class);
     }

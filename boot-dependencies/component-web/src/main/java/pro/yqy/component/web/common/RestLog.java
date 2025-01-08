@@ -1,6 +1,7 @@
 package pro.yqy.component.web.common;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import pro.yqy.component.web.conf.RestLogConfig;
@@ -9,13 +10,14 @@ import pro.yqy.component.web.util.HttpUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 public class RestLog {
     private static final ThreadLocal<Long> startTime = new ThreadLocal<>();
 
-    public static void logRequest(HttpRequestWrapper request) throws JsonProcessingException {
-        if (RestLogConfig.isEnable()) {
+    public static void logRequest(HttpServletRequest request) throws JsonProcessingException {
+        if (!RestLogConfig.isEnable()) {
             startTime.set(-1L);
             return;
         }
@@ -47,25 +49,25 @@ public class RestLog {
     }
 
     public static void logResponse(Object result) {
-        if (RestLogConfig.isEnable() || !log.isDebugEnabled()) {
+        if (!RestLogConfig.isEnable() || !log.isDebugEnabled()) {
             return;
         }
         try {
-            if (result != null) {
-                if (result instanceof byte[]) {
-                    result = "文件流";
-                }
-                else {
-                    result = SingletonItem.OBJECT_MAPPER.writeValueAsString(result);
-                }
-            }
+            String outputStr = switch (result) {
+                case byte[] ignore -> "文件流";
+                case null -> null;
+                default -> SingletonItem.OBJECT_MAPPER.writeValueAsString(result);
+            };
+
             Long requestTime = startTime.get();
-            if (requestTime != null && requestTime > 0) {
-                log.info("执行{}毫秒，返回结果:\n{}", System.currentTimeMillis() - requestTime, result);
-                startTime.remove();
-            } else if (requestTime == null) {
+            if (Objects.isNull(requestTime) || requestTime <= 0) {
                 log.info("执行结束，返回结果:\n{}", result);
+                return;
             }
+
+            log.info("执行{}毫秒，返回结果:\n{}", System.currentTimeMillis() - requestTime, outputStr);
+            startTime.remove();
+
         } catch (Exception e) {
             log.error("LOG_RESPONSE_ERROR", e);
         }

@@ -23,6 +23,12 @@
             <artifactId>component-knife4j</artifactId>
             <version>${revision}</version>
         </dependency>
+
+        <dependency>
+            <groupId>pro.yqy</groupId>
+            <artifactId>authorization-model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

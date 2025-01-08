@@ -9,8 +9,6 @@ import java.io.Serializable;
 @Getter
 @Slf4j
 public class ResultMessage<T> implements Serializable {
-    private static final long serialVersionUID = 1L;
-
     private final int code;
     private final String msg;
     private final T data;
@@ -22,8 +20,8 @@ public class ResultMessage<T> implements Serializable {
     }
 
     public ResultMessage(IRestStatus restStatus, T data) {
-        this.code = restStatus.getCode();
-        this.msg = restStatus.getMessage();
+        this.code = restStatus.code();
+        this.msg = restStatus.message();
         this.data = data;
     }
 }

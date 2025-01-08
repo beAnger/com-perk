@@ -37,12 +37,12 @@ public enum RestStatus implements IRestStatus {
     }
 
     @Override
-    public int getCode() {
+    public int code() {
         return code;
     }
 
     @Override
-    public String getMessage() {
+    public String message() {
         return msg;
     }
 

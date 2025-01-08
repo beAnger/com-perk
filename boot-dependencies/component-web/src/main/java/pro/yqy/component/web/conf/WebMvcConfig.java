@@ -21,19 +21,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(new StringHttpMessageConverter(StandardCharsets.UTF_8));
-    }
-
-    @Override
-    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(new MappingJackson2HttpMessageConverter());
-        converters.add(new ByteArrayHttpMessageConverter());
+        converters.addFirst(new ByteArrayHttpMessageConverter());
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(webMvcInterceptor);
     }
+
+
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

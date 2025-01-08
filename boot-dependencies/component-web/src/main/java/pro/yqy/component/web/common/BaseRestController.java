@@ -40,14 +40,14 @@ public abstract class BaseRestController {
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public Object processApiException(MethodArgumentNotValidException e) {
 
-        List<String> msgList = new ArrayList<>();
+        List<String> msgList = new ArrayList<>(e.getBindingResult().getAllErrors().size());
         for (ObjectError objectError : e.getBindingResult().getAllErrors()) {
             msgList.add(objectError.getDefaultMessage());
         }
 
-        log.error("字段校验异常-MethodArgumentNotValidException: {}, detail: {}", StringUtils.toString(msgList), e.getMessage());
+        log.error("字段校验异常-MethodArgumentNotValidException: {}", StringUtils.toString(msgList));
         return this.handleExceptionAdapter(
-                new RestException(RestStatus.INVALID_MODEL_FIELDS, StringUtils.toString(msgList))
+                new RestException(RestStatus.INVALID_MODEL_FIELDS.code(), StringUtils.toString(msgList))
         );
     }
 
@@ -68,10 +68,9 @@ public abstract class BaseRestController {
     public Object doHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         String msg = e.getMessage();
         if (msg.startsWith("JSON parse error")) {
-            String start = "field : ";
-            String end = ";";
-            msg = "字段[" + msg.substring(msg.indexOf(start) + start.length(), msg.indexOf(end)) + "]解析出错";
-            return this.handleExceptionAdapter(new RestException(RestStatus.INVALID_JSON_PARSE, msg));
+            String start = "problem:";
+            msg = "字段[" + msg.substring(msg.indexOf(start) + start.length(), msg.length() - 1) + "]解析出错";
+            return this.handleExceptionAdapter(new RestException(RestStatus.INVALID_JSON_PARSE.code(), msg));
         } else {
             log.error("HttpMessageNotReadableException: {}, detail: {}", msg, e.getMessage());
             return this.handleExceptionAdapter(new RestException(msg, e));
@@ -90,7 +89,7 @@ public abstract class BaseRestController {
 
     @ExceptionHandler({Exception.class})
     public Object handleException(Exception e) {
-        RestException restException = new RestException(RestStatus.UNKNOWN_ERROR.getMessage(), e);
+        RestException restException = new RestException(RestStatus.UNKNOWN_ERROR.message(), e);
         return this.handleExceptionAdapter(restException);
     }
 

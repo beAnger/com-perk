@@ -10,5 +10,12 @@
     </parent>
 
     <artifactId>authorization-model</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>pro.yqy</groupId>
+            <artifactId>component-model</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
 
 </project>

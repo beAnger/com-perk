@@ -1,7 +1,7 @@
 package pro.yqy.component.web.error;
 
 public interface IRestStatus {
-    int getCode();
+    int code();
 
-    String getMessage();
+    String message();
 }
