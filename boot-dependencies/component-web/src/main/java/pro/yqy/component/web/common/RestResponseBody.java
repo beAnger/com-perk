@@ -57,6 +57,7 @@ public class RestResponseBody implements ResponseBodyAdvice<Object> {
             case IRestStatus restStatus -> new ResultMessage<Void>(restStatus.code(), restStatus.message(), null);
             case ResultMessage<?> ignored -> body;
             case byte[] ignored -> body;
+            case String str -> new ResultMessage<>(RestStatus.SUCCESS, str).toString();
             default -> new ResultMessage<>(RestStatus.SUCCESS, body);
         };
 

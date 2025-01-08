@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import pro.yqy.component.web.conf.RestLogConfig;
 import pro.yqy.component.web.singleton.SingletonItem;
-import pro.yqy.component.web.util.HttpUtils;
+import pro.yqy.component.web.util.IPUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +39,7 @@ public class RestLog {
         }
         logMap.put("Method", request.getMethod());
         logMap.put("Path", request.getServletPath());
-        logMap.put("Host", HttpUtils.getRemoteAddr(request));
+        logMap.put("Host", IPUtils.getRemoteAddr(request));
         logMap.put("Content-Length", request.getContentLength());
         logMap.put("Cookies", request.getCookies());
         logMap.put("Referer", request.getHeader("Referer"));
@@ -55,7 +55,8 @@ public class RestLog {
         try {
             String outputStr = switch (result) {
                 case byte[] ignore -> "文件流";
-                case null -> null;
+                case String jsonStr -> jsonStr;
+                case null -> "( Empty Content )";
                 default -> SingletonItem.OBJECT_MAPPER.writeValueAsString(result);
             };
 
