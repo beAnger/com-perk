@@ -14,6 +14,7 @@
         <module>boot-dependencies</module>
         <module>authorization</module>
         <module>gateway</module>
+        <module>biz-demo</module>
     </modules>
 
     <properties>

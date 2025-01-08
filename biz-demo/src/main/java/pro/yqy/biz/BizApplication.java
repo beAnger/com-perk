@@ -1,17 +1,15 @@
-package pro.yqy.authorization;
+package pro.yqy.biz;
 
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 
 @EnableDubbo
-@EnableDiscoveryClient
 @SpringBootApplication
 @ComponentScan({"pro.yqy"})
-public class AuthorizationApplication {
+public class BizApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AuthorizationApplication.class, args);
+        SpringApplication.run(BizApplication.class, args);
     }
 }

@@ -1,34 +1,25 @@
 server:
-  port: 8090
+  port: 8091
 
 spring:
   application:
-    name: authorization
+    name: biz-demo
   profiles:
     active: dev
   cloud:
     nacos:
       server-addr: localhost:8848
-  data:
-    redis:
-      database: 0
-      host: localhost
-      port: 6379
 
 dubbo:
   registry:
-    register-mode: instance
     address: nacos://${spring.cloud.nacos.server-addr}
     username: nacos
     password: nacos
-  protocol:
-    name: dubbo
-    port: 50051
   application:
-    name: authorization
+    name: biz-demo
     logger: slf4j
     qos-enable: true
-    qos-port: 33333
+    qos-port: 22222
     qos-accept-foreign-ip: false
 
 boot:

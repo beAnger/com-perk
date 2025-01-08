@@ -20,15 +20,15 @@ public class AccountController extends BaseRestController {
 
     private final AccountService accountService;
 
-    @PostMapping(value = "/send-verification-code", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "发送验证码")
+    @PostMapping(value = "/send-verification-code", produces = MediaType.APPLICATION_JSON_VALUE)
     public String sendVerificationCode(HttpServletRequest request,
                                        @Validated @RequestBody SendVerificationCodeRequestBean requestBean) {
         return accountService.sendVerificationCode(request, requestBean);
     }
 
-    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "账号注册接口")
+    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     public String register(@Validated @RequestBody RegisterRequestBean requestBean) {
         return accountService.register(requestBean);
     }
