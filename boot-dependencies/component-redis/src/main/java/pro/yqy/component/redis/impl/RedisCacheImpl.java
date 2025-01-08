@@ -20,9 +20,6 @@ public class RedisCacheImpl implements RedisCache {
 
     //key操作
     private String appendKeyPrefix(Object key) {
-        if (key instanceof String) {
-            return ((String) key);
-        }
         return key.toString();
     }
 
