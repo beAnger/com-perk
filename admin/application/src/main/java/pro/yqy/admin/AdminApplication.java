@@ -8,8 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDubbo
 @SpringBootApplication
 @ComponentScan({"pro.yqy"})
-public class BizApplication {
+public class AdminApplication {
     public static void main(String[] args) {
-        SpringApplication.run(BizApplication.class, args);
+        SpringApplication.run(AdminApplication.class, args);
     }
 }

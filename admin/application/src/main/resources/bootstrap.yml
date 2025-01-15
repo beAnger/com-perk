@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: biz-demo
+    name: admin
   profiles:
     active: dev
   cloud:
@@ -24,7 +24,7 @@ dubbo:
     parameters:
       namespace: 9ada058d-75f6-4f98-b760-b70b1b33709a
   application:
-    name: biz-demo
+    name: admin
     logger: slf4j
     qos-enable: true
     qos-port: 22222
