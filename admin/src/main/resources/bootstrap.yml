@@ -29,6 +29,9 @@ dubbo:
     qos-enable: true
     qos-port: 22222
     qos-accept-foreign-ip: false
+  consumer:
+    check: false
+
 
 boot:
   restlog:

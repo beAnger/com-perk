@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Service;
 import pro.yqy.authorization.constant.AuthorizationError;
 import pro.yqy.authorization.model.bean.account.RegisterRequestBean;
