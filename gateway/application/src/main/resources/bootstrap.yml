@@ -44,9 +44,6 @@ knife4j:
       enabled: true
       # 指定版本号(swagger2|openapi3)
       version : openapi3
-      # 需要排除的微服务(eg:网关服务)
-      excluded-services:
-        - order
       # 如果子服务是OpenAPI3，并且有个性化配置
       oas3:
         url: /v3/api-docs?group=default

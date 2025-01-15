@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 public class StringUtils {
 
@@ -47,5 +48,17 @@ public class StringUtils {
             return SingletonItem.EMPTY_STRING;
         }
         return obj instanceof String e ? e : obj + "";
+    }
+
+    public static String generateRandomCode(int length) {
+        Random random = new Random();
+        StringBuilder code = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+            int digit = random.nextInt(10);
+            code.append(digit);
+        }
+
+        return code.toString();
     }
 }

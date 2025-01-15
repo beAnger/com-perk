@@ -4,17 +4,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
 import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Service;
 import pro.yqy.authorization.constant.AuthorizationError;
 import pro.yqy.authorization.model.bean.account.RegisterRequestBean;
 import pro.yqy.authorization.model.bean.account.SendVerificationCodeRequestBean;
+import pro.yqy.authorization.model.bean.message.MessageDTO;
 import pro.yqy.authorization.model.constant.account.AccountRedisKey;
 import pro.yqy.authorization.service.AccountService;
+import pro.yqy.authorization.service.MessageSender;
 import pro.yqy.component.redis.RedisCache;
 import pro.yqy.component.web.error.enumeration.RestStatus;
 import pro.yqy.component.web.exception.RestException;
 import pro.yqy.component.web.util.IPUtils;
+import pro.yqy.component.web.util.StringUtils;
 
 import java.text.MessageFormat;
 import java.util.Objects;
@@ -26,6 +31,8 @@ import java.util.concurrent.TimeUnit;
 public class AccountServiceImpl implements AccountService {
 
     private final RedisCache redisCache;
+
+    private final ApplicationContext applicationContext;
 
     @Override
     public String sendVerificationCode(HttpServletRequest request,
@@ -47,6 +54,18 @@ public class AccountServiceImpl implements AccountService {
         if (Objects.isNull(exists) || !exists) {
             throw new RestException(AuthorizationError.request_too_frequently);
         }
+        MessageSender messageSender;
+        try {
+            messageSender = applicationContext.getBean(
+                    requestBean.getChannelType().getSenderBeanName(), MessageSender.class
+            );
+        } catch (Exception e) {
+            throw new RestException(AuthorizationError.no_such_message_send_channel);
+        }
+        String randomCode = StringUtils.generateRandomCode(6);
+
+        MessageDTO message = new MessageDTO(null, requestBean.getIdentity(), "验证码", randomCode, null);
+        messageSender.send(message);
 
         return RestStatus.SUCCESS.message();
     }
