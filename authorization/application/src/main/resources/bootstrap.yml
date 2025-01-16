@@ -22,6 +22,15 @@ spring:
       port: 6379
   mail:
     host: smtp.qq.com
+    port: 465
+    username: your-email@qq.com
+    password: your-email-password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 dubbo:
   registry:

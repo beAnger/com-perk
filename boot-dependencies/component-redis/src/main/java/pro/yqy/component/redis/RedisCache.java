@@ -36,9 +36,10 @@ public interface RedisCache {
      * 给指定的key设置过期时间  单位为秒
      *
      * @param key     key
-     * @param timeout 过期时间 单位是秒
+     * @param timeout 过期时间
+     * @param unit 时间单位
      */
-    void expire(String key, Integer timeout);
+    void expire(String key, long timeout, TimeUnit unit);
 
 
     /**
@@ -73,14 +74,14 @@ public interface RedisCache {
     void set(String key, Object value);
 
     /**
-     * set字符串 并加上失效时间  以豪秒为单位
+     * set字符串 并加上失效时间
      *
      * @param key    key
      * @param value  value
      * @param timeout 失效时间
      * @param timeUnit 失效时间单位
      */
-    void setEx(Object key, Long timeout, TimeUnit timeUnit, Object value);
+    void setEx(Object key, long timeout, TimeUnit timeUnit, Object value);
 
     /**
      * 当key不存在时 设置key value
@@ -92,7 +93,7 @@ public interface RedisCache {
      * @return boolean true为成功，可能为空
      */
     @Nullable
-    Boolean setNx(String key, Long timeout, TimeUnit timeUnit, Object value);
+    Boolean setNx(String key, long timeout, TimeUnit timeUnit, Object value);
 
 
     /**

@@ -32,6 +32,10 @@ public enum ChannelType {
         return Stream.of(values()).filter(t -> t.getCode() == code).findFirst().orElse(null);
     }
 
+    public boolean validate(String identity) {
+        return identity.matches(regex);
+    }
+
     @Override
     public String toString() {
         return this.code + "->" + this.desc;

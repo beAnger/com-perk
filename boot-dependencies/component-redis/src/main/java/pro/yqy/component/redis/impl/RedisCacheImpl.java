@@ -55,8 +55,8 @@ public class RedisCacheImpl implements RedisCache {
      * @param timeout 过期时间 单位是秒
      */
     @Override
-    public void expire(String key, Integer timeout) {
-        redisTemplate.expire(appendKeyPrefix(key), timeout, TimeUnit.SECONDS);
+    public void expire(String key, long timeout, TimeUnit unit) {
+        redisTemplate.expire(appendKeyPrefix(key), timeout, unit);
     }
 
 
@@ -114,7 +114,7 @@ public class RedisCacheImpl implements RedisCache {
      * @param timeout  失效时间 单位为秒
      */
     @Override
-    public void setEx(Object key, Long timeout, TimeUnit timeUnit, Object value) {
+    public void setEx(Object key, long timeout, TimeUnit timeUnit, Object value) {
         redisTemplate.opsForValue().set(appendKeyPrefix(key), value, timeout, timeUnit);
     }
 
@@ -127,7 +127,7 @@ public class RedisCacheImpl implements RedisCache {
      * @return boolean true为成功，可能为空
      */
     @Override
-    public Boolean setNx(String key, Long timeout, TimeUnit timeUnit, Object value) {
+    public Boolean setNx(String key, long timeout, TimeUnit timeUnit, Object value) {
         return redisTemplate.opsForValue().setIfAbsent(appendKeyPrefix(key), value, timeout, timeUnit);
     }
 

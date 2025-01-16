@@ -34,37 +34,42 @@ public class AccountServiceImpl implements AccountService {
 
     private final ApplicationContext applicationContext;
 
+    private static final String VERIFY_CODE_KEY_FORMAT = "{0}{1}:{2}";
+
     @Override
     public String sendVerificationCode(HttpServletRequest request,
                                        @NotNull SendVerificationCodeRequestBean requestBean) {
-
-        boolean identityLegal = requestBean.getIdentity().matches(requestBean.getChannelType().getRegex());
-        if (!identityLegal) {
+        if (!requestBean.getChannelType().validate(requestBean.getIdentity())) {
             throw new RestException(AuthorizationError.illegal_identity_format);
         }
 
-        String resendKey = MessageFormat.format(
-                "{0}{1}:{2}",
+        String sendKey = MessageFormat.format(
+                VERIFY_CODE_KEY_FORMAT,
                 AccountRedisKey.REGISTER_ACCOUNT_PREFIX_KEY,
                 requestBean.getActionType().name(),
                 IPUtils.getRemoteAddr(request)
         );
-
-        Boolean exists = redisCache.setNx(resendKey, 60L, TimeUnit.SECONDS, requestBean.getIdentity());
+        Boolean exists = redisCache.setNx(sendKey, 60L, TimeUnit.SECONDS, requestBean.getIdentity());
         if (Objects.isNull(exists) || !exists) {
             throw new RestException(AuthorizationError.request_too_frequently);
         }
+
         MessageSender messageSender;
         try {
             messageSender = applicationContext.getBean(
                     requestBean.getChannelType().getSenderBeanName(), MessageSender.class
             );
         } catch (Exception e) {
+            log.error("Failed to get MessageSender bean: {}", e.getMessage(), e);
             throw new RestException(AuthorizationError.no_such_message_send_channel);
         }
         String randomCode = StringUtils.generateRandomCode(6);
+        redisCache.setEx(
+                AccountRedisKey.REGISTER_ACCOUNT_VERIFY_KEY + requestBean.getIdentity(),
+                5, TimeUnit.MINUTES, randomCode
+        );
 
-        MessageDTO message = new MessageDTO(null, requestBean.getIdentity(), "验证码", randomCode, null);
+        MessageDTO message = new MessageDTO(requestBean.getIdentity(), "验证码", randomCode);
         messageSender.send(message);
 
         return RestStatus.SUCCESS.message();
@@ -72,8 +77,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public String register(RegisterRequestBean requestBean) {
-        boolean identityLegal = requestBean.getIdentity().matches(requestBean.getChannelType().getRegex());
-        if (!identityLegal) {
+        if (!requestBean.getChannelType().validate(requestBean.getIdentity())) {
             throw new RestException(AuthorizationError.illegal_identity_format);
         }
 

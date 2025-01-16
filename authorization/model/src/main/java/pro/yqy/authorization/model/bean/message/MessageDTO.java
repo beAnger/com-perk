@@ -8,14 +8,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class MessageDTO {
-
-    private String from;
-
     private String to;
 
     private String subject;
 
     private String body;
-
-    private String cc;
 }
