@@ -6,7 +6,7 @@
     <parent>
         <groupId>pro.yqy</groupId>
         <artifactId>admin</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>admin-core</artifactId>
@@ -15,12 +15,6 @@
         <dependency>
             <groupId>pro.yqy</groupId>
             <artifactId>authorization-client</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>pro.yqy</groupId>
-            <artifactId>admin-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 

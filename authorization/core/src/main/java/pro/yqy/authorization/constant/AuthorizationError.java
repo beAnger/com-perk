@@ -9,7 +9,8 @@ import pro.yqy.component.web.error.IRestStatus;
 public enum AuthorizationError implements IRestStatus {
     illegal_identity_format(100001, "账号信息格式错误"),
     request_too_frequently(100002, "请求过于频繁，请稍候再重试"),
-    no_such_message_send_channel(100003, "系统发送消息时发生了错误")
+    no_such_message_send_channel(100003, "系统发送消息时发生了错误"),
+    verify_code_send_failed(100004, "发送验证码失败"),
 
     ;
 

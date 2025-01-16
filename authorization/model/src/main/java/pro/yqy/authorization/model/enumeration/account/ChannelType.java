@@ -18,7 +18,6 @@ public enum ChannelType {
     ),
     ;
 
-    @JsonValue
     private final byte code;
 
     private final String desc;

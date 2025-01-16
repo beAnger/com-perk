@@ -5,17 +5,22 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>pro.yqy</groupId>
-        <artifactId>admin</artifactId>
+        <artifactId>boot-dependencies</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>admin-model</artifactId>
+    <artifactId>component-mail</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>pro.yqy</groupId>
-            <artifactId>component-model</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

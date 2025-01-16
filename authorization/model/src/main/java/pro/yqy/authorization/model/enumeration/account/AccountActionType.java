@@ -9,9 +9,9 @@ import java.util.stream.Stream;
 @Getter
 @AllArgsConstructor
 public enum AccountActionType {
-    register((byte) 1, "register"),
-    login((byte) 2, "login"),
-    reset_password((byte) 3, "reset password"),
+    register((byte) 1, "注册"),
+    login((byte) 2, "登录"),
+    reset_password((byte) 3, "重置密码"),
     ;
     private final byte code;
 

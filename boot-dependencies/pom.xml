@@ -21,6 +21,7 @@
         <module>component-model</module>
         <module>component-nacos</module>
         <module>component-dubbo</module>
+        <module>component-mail</module>
     </modules>
 
     <properties>
