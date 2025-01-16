@@ -1,7 +1,8 @@
 package pro.yqy.authorization.service.impl;
 
-import lombok.AllArgsConstructor;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -12,16 +13,20 @@ import pro.yqy.component.web.exception.RestException;
 
 @Slf4j
 @Service("emailMessageSender")
-@AllArgsConstructor
 public class EmailMessageSenderImpl implements MessageSender {
 
-    private final JavaMailSender javaMailSender;
+    @Resource
+    private JavaMailSender javaMailSender;
+
+    @Value("${boot.mail.username}")
+    private String from;
 
     @Override
     public void send(MessageDTO message) {
         log.info("Sending email message to: {}", message.getTo());
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom(from);
         mailMessage.setTo(message.getTo());
         mailMessage.setSubject(message.getSubject());
         mailMessage.setText(message.getBody());
