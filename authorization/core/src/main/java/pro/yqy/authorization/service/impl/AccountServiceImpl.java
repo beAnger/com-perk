@@ -78,6 +78,14 @@ public class AccountServiceImpl implements AccountService {
         if (!requestBean.getChannelType().validate(requestBean.getIdentity())) {
             throw new RestException(AuthorizationError.illegal_identity_format);
         }
+        if (!redisCache.exists(AccountRedisKey.REGISTER_ACCOUNT_PREFIX_KEY + requestBean.getIdentity())) {
+            throw new RestException(AuthorizationError.verify_code_error);
+        }
+        String randomCode = redisCache.get(AccountRedisKey.REGISTER_ACCOUNT_PREFIX_KEY + requestBean.getIdentity(), String.class);
+        if (requestBean.getVerificationCode().equals(randomCode)) {
+            throw new RestException(AuthorizationError.verify_code_error);
+        }
+
 
         return RestStatus.SUCCESS.message();
     }
