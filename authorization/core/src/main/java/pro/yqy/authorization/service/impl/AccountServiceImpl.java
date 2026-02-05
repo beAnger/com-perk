@@ -1,8 +1,10 @@
 package pro.yqy.authorization.service.impl;
 
+import com.yqy.common.AssertUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -25,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
     private final RedisCache redisCache;
@@ -37,9 +39,8 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public String sendVerificationCode(HttpServletRequest request,
                                        @NotNull SendVerificationCodeRequestBean requestBean) {
-        if (!requestBean.getChannelType().validate(requestBean.getIdentity())) {
-            throw new RestException(AuthorizationError.illegal_identity_format);
-        }
+        AssertUtil.assertTrue(requestBean.getChannelType().validate(requestBean.getIdentity()),
+                () -> new RestException(AuthorizationError.illegal_identity_format));
 
         String sendKey = MessageFormat.format(
                 VERIFY_CODE_KEY_FORMAT,
@@ -75,9 +76,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public String register(RegisterRequestBean requestBean) {
-        if (!requestBean.getChannelType().validate(requestBean.getIdentity())) {
-            throw new RestException(AuthorizationError.illegal_identity_format);
-        }
+        AssertUtil.assertTrue(requestBean.getChannelType().validate(requestBean.getIdentity()),
+                () -> new RestException(AuthorizationError.illegal_identity_format));
         if (!redisCache.exists(AccountRedisKey.REGISTER_ACCOUNT_PREFIX_KEY + requestBean.getIdentity())) {
             throw new RestException(AuthorizationError.verify_code_error);
         }

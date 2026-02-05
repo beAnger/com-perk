@@ -54,6 +54,12 @@
             <version>${revision}</version>
         </dependency>
 
+        <dependency>
+            <groupId>pro.yqy</groupId>
+            <artifactId>component-common</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
     </dependencies>
 
 </project>
