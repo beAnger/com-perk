@@ -36,8 +36,8 @@
     </appender>
 
     <logger name="org.hibernate.validator" level="INFO"/>
-    <logger name="org.apache.dubbo" level="INFO"/>
-    <logger name="com.alibaba.nacos" level="INFO"/>
+    <logger name="org.apache.dubbo" level="WARN"/>
+    <logger name="com.alibaba.nacos" level="DEBUG"/>
     <logger name="org.springframework" level="INFO"/>
 
     <!-- 开发环境日志配置 -->

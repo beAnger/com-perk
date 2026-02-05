@@ -11,10 +11,13 @@ spring:
       server-addr: localhost:8848
       config:
         server-addr: ${spring.cloud.nacos.server-addr}
-        namespace: 35e44ef7-acf8-4bee-8aed-e2610e32f82e
+        namespace: ""
+        shared-configs:
+
+        enabled: true
       discovery:
         server-addr: ${spring.cloud.nacos.server-addr}
-        namespace: 35e44ef7-acf8-4bee-8aed-e2610e32f82e
+        namespace: ""
   data:
     redis:
       database: 0
@@ -29,7 +32,7 @@ dubbo:
     username: nacos
     password: nacos
     parameters:
-      namespace: 9ada058d-75f6-4f98-b760-b70b1b33709a
+      namespace: 7e658f35-a36f-4fcf-add5-87f61b6b2168
   protocol:
     name: dubbo
     port: 50051

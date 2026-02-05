@@ -17,8 +17,8 @@ public class SendVerificationCodeRequestBean {
     @Schema(description = "渠道类型")
     private ChannelType channelType;
 
-    @NotBlank(message = "渠道号码不能为空")
-    @Schema(description = "渠道号码")
+    @NotBlank(message = "渠道账号不能为空")
+    @Schema(description = "渠道账号")
     private String identity;
 
     @NotNull(message = "作用类型不能为空")

@@ -11,10 +11,10 @@ spring:
       server-addr: localhost:8848
       config:
         server-addr: ${spring.cloud.nacos.server-addr}
-        namespace: 35e44ef7-acf8-4bee-8aed-e2610e32f82e
+        namespace: ""
       discovery:
         server-addr: ${spring.cloud.nacos.server-addr}
-        namespace: 35e44ef7-acf8-4bee-8aed-e2610e32f82e
+        namespace: ""
     gateway:
       discovery:
         locator:
