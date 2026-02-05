@@ -1,0 +1,1 @@
+you need add plugin lfs to git, some jar file is too large
